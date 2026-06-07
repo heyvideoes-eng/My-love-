@@ -298,9 +298,12 @@ export default function RomanticPlayer() {
     if (queue.length > 0 && queueIndex >= 0 && queueIndex < queue.length) {
       const target = queue[queueIndex];
       setCurrentSong(target);
-      if (player && player.loadVideoById) {
-        player.loadVideoById(target.videoId);
-        setIsPlaying(true);
+      if (player) {
+        if (isPlaying) {
+          if (player.loadVideoById) player.loadVideoById(target.videoId);
+        } else {
+          if (player.cueVideoById) player.cueVideoById(target.videoId);
+        }
       }
     }
   }, [queueIndex, queue, player]);
