@@ -275,7 +275,7 @@ export default function Dashboard({ initialDailyMessage, moodMessages, onResetIn
   }
 
   return (
-    <div className="min-h-screen bg-[#080405] pb-24 relative overflow-x-hidden pt-24">
+    <div className="min-h-screen bg-[#080405] pb-24 relative pt-24">
       {/* Background visual layers */}
       <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
         <div className="ambient-glow-orb glow-wine w-[500px] h-[500px] top-10 left-[-100px]" />

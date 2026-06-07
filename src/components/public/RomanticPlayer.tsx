@@ -635,14 +635,14 @@ export default function RomanticPlayer() {
                 </div>
 
                 {/* Info titles */}
-                <div className="text-center sm:text-left flex-grow">
+                <div className="text-center sm:text-left flex-grow min-w-0 w-full">
                   <span className="text-fluid-2xs uppercase tracking-widest text-[#c97b84] font-bold block mb-1">
                     Playing from queue
                   </span>
-                  <h3 className="font-serif text-fluid-2xl md:text-fluid-3xl text-[#fdfaf6] font-normal leading-snug truncate max-w-sm">
+                  <h3 className="font-serif text-fluid-2xl md:text-fluid-3xl text-[#fdfaf6] font-normal leading-snug truncate">
                     {currentSong.title}
                   </h3>
-                  <p className="text-fluid-base text-[#8a7679] mt-1 font-semibold truncate max-w-sm">
+                  <p className="text-fluid-base text-[#8a7679] mt-1 font-semibold truncate">
                     {currentSong.channel}
                   </p>
                 </div>
