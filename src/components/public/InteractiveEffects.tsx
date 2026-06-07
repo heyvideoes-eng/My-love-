@@ -22,19 +22,8 @@ export default function InteractiveEffects() {
   const lastMousePos = useRef({ x: 0, y: 0, time: 0 });
 
   useEffect(() => {
-    // ── 1. Initialize Lenis Smooth Kinetic Scrolling ────────────────
-    const lenis = new Lenis({
-      duration: 1.4,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // smooth exponential decel
-      infinite: false,
-    });
-
-    let lenisRafId: number;
-    const scrollRaf = (time: number) => {
-      lenis.raf(time);
-      lenisRafId = requestAnimationFrame(scrollRaf);
-    };
-    lenisRafId = requestAnimationFrame(scrollRaf);
+    // Native CSS smooth scrolling is already enabled in globals.css.
+    // Lenis was removed because it was hijacking the scroll and failing to recalculate height after the Dashboard mounted.
 
     // ── 2. Initialize Cursor Heart Trail Canvas ─────────────────────
     const canvas = canvasRef.current;
@@ -152,11 +141,9 @@ export default function InteractiveEffects() {
 
     // Cleanup
     return () => {
-      cancelAnimationFrame(lenisRafId);
       cancelAnimationFrame(canvasRafId);
       window.removeEventListener("resize", resizeCanvas);
       window.removeEventListener("mousemove", handleMouseMove);
-      lenis.destroy();
     };
   }, []);
 
