@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-export default async function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const url = request.nextUrl;
   // Default to public if no variable is set
   const appRole = process.env.APP_ROLE || 'public';

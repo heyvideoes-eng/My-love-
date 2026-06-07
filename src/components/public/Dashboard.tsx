@@ -129,7 +129,7 @@ export default function Dashboard({ initialDailyMessage, moodMessages, onResetIn
           .maybeSingle();
 
         if (dbPlan && dbPlan.plan_data) {
-          setPlan(dbPlan.plan_data as DatePlan);
+          setPlan(dbPlan.plan_data as LegacyDatePlan);
           localStorage.setItem("rv_plan", JSON.stringify(dbPlan.plan_data));
         } else {
           const savedPlan = localStorage.getItem("rv_plan");

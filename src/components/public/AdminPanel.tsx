@@ -5,7 +5,7 @@ import { X, Lock, Check, Sparkles, Calendar, BookOpen, Camera, FileText, Send } 
 import { motion, AnimatePresence } from "framer-motion";
 import { createClient } from "@/lib/supabase/client";
 import { SpecialDate } from "./CountdownHighlight";
-import { DatePlan } from "./DatePlanner";
+import type { DatePlan } from "@/lib/types";
 import { CURATED_BOLLYWOOD_SONGS } from "./RomanticPlayer";
 
 interface AdminPanelProps {
@@ -263,8 +263,8 @@ export default function AdminPanel({
                           <label className="premium-label">Time</label>
                           <input
                             type="text"
-                            value={planInput.time}
-                            onChange={(e) => setPlanInput({ ...planInput, time: e.target.value })}
+                            value={planInput.plan_time || ""}
+                            onChange={(e) => setPlanInput({ ...planInput, plan_time: e.target.value })}
                             className="premium-input"
                           />
                         </div>
@@ -272,7 +272,7 @@ export default function AdminPanel({
                           <label className="premium-label">Place</label>
                           <input
                             type="text"
-                            value={planInput.place}
+                            value={planInput.place || ""}
                             onChange={(e) => setPlanInput({ ...planInput, place: e.target.value })}
                             className="premium-input"
                           />
@@ -284,20 +284,20 @@ export default function AdminPanel({
                         <label className="premium-label">Activity</label>
                         <input
                           type="text"
-                          value={planInput.activity}
+                          value={planInput.activity || ""}
                           onChange={(e) => setPlanInput({ ...planInput, activity: e.target.value })}
                           className="premium-input"
                         />
                       </div>
 
-                      {/* Dress & Budget */}
+                      {/* Title & Budget */}
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="premium-label">Dress</label>
+                          <label className="premium-label">Title</label>
                           <input
                             type="text"
-                            value={planInput.dress}
-                            onChange={(e) => setPlanInput({ ...planInput, dress: e.target.value })}
+                            value={planInput.title || ""}
+                            onChange={(e) => setPlanInput({ ...planInput, title: e.target.value })}
                             className="premium-input text-fluid-sm"
                           />
                         </div>
@@ -305,7 +305,7 @@ export default function AdminPanel({
                           <label className="premium-label">Budget</label>
                           <input
                             type="text"
-                            value={planInput.budget}
+                            value={planInput.budget || ""}
                             onChange={(e) => setPlanInput({ ...planInput, budget: e.target.value })}
                             className="premium-input text-fluid-sm"
                           />
@@ -316,7 +316,7 @@ export default function AdminPanel({
                       <div>
                         <label className="premium-label">Notes</label>
                         <textarea
-                          value={planInput.notes}
+                          value={planInput.notes || ""}
                           onChange={(e) => setPlanInput({ ...planInput, notes: e.target.value })}
                           className="premium-input h-16 resize-none"
                         />

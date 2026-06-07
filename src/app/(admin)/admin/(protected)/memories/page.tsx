@@ -78,7 +78,7 @@ export default function AdminMemoriesPage() {
     setIsSaving(false);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this memory milestone from the timeline?")) {
       const supabase = createClient();
       if (supabase) {
