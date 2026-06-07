@@ -333,7 +333,16 @@ export default function Dashboard({ initialDailyMessage, moodMessages, onResetIn
         {/* Custom YouTube Romantic Music Player */}
         {siteSettings?.sections_visible?.music !== false && <RomanticPlayer />}
 
-        {/* Date Plan Invitation section removed as requested */}
+        {/* ── Published Date Plan Invitation ─────────────────────── */}
+        {siteSettings?.sections_visible?.dateplan !== false && activeDatePlan && (
+          <section style={{ padding: "4rem 0" }}>
+            <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+              <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.2em", color: "var(--rose-gold-dim)", display: "block", marginBottom: "0.6rem" }}>Our Next Date</span>
+              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.8rem,4vw,2.8rem)", fontWeight: 400, color: "var(--moonlight)" }}>An Invitation for You</h2>
+            </div>
+            <DatePlanCard plan={activeDatePlan} />
+          </section>
+        )}
 
         {/* Date Reminders Widget (CRUD dates timeline) */}
         <DateReminders dates={dates} setDates={handleSetDates} />
