@@ -1,0 +1,981 @@
+@import "tailwindcss";
+
+/* ─── Premium Romantic Design System Tokens ─────────────────────────────── */
+@layer base {
+  :root {
+    --bg-dark:          #080405;
+    --bg-card:          rgba(20, 10, 12, 0.65);
+    --bg-card-hover:    rgba(32, 16, 20, 0.8);
+    --border-glow:      rgba(232, 197, 154, 0.12);
+    --border-glow-active: rgba(201, 123, 132, 0.45);
+    
+    /* Elegant Color Scheme */
+    --wine:             #5c1322;
+    --wine-deep:        #2d050d;
+    --blush:            #e5b0b6;
+    --rose:             #c97b84;
+    --rose-dark:        #a85c65;
+    --rose-gold:        #e8c59a;
+    --rose-gold-dim:    #c5a782;
+    --moonlight:        #fdfaf6;
+    --charcoal:         #1c1416;
+    --muted-mauve:      #8a7679;
+    
+    --font-serif: 'Boska', Georgia, serif;
+    --font-sans:  'Satoshi', Inter, sans-serif;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--bg-dark);
+    color: var(--moonlight);
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: var(--moonlight);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* Custom Elegant Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(232, 197, 154, 0.15);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(201, 123, 132, 0.45);
+  }
+}
+
+/* ─── Fluid Typography System (Clamp Scaling) ─────────────────────── */
+@layer utilities {
+  .text-fluid-3xs {
+    font-size: clamp(0.4rem, 0.35rem + 0.25vw, 0.55rem); /* ~6px to ~9px */
+  }
+  .text-fluid-2xs {
+    font-size: clamp(0.5rem, 0.45rem + 0.25vw, 0.65rem); /* ~8px to ~10px */
+  }
+  .text-fluid-xs {
+    font-size: clamp(0.6rem, 0.55rem + 0.25vw, 0.75rem); /* ~9.5px to ~12px */
+  }
+  .text-fluid-sm {
+    font-size: clamp(0.7rem, 0.65rem + 0.3vw, 0.9rem);   /* ~11px to ~14.5px */
+  }
+  .text-fluid-base {
+    font-size: clamp(0.85rem, 0.8rem + 0.35vw, 1.1rem);  /* ~13.5px to ~17.5px */
+  }
+  .text-fluid-lg {
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.3rem);      /* ~16px to ~20.8px */
+  }
+  .text-fluid-xl {
+    font-size: clamp(1.2rem, 1.1rem + 0.6vw, 1.6rem);    /* ~19px to ~25.6px */
+  }
+  .text-fluid-2xl {
+    font-size: clamp(1.5rem, 1.3rem + 1vw, 2.1rem);      /* ~24px to ~33.6px */
+  }
+  .text-fluid-3xl {
+    font-size: clamp(1.8rem, 1.5rem + 1.5vw, 2.8rem);    /* ~28.8px to ~44.8px */
+  }
+  .text-fluid-4xl {
+    font-size: clamp(2.2rem, 1.8rem + 2vw, 3.5rem);      /* ~35px to ~56px */
+  }
+  .text-fluid-5xl {
+    font-size: clamp(2.8rem, 2.2rem + 3vw, 4.5rem);      /* ~44.8px to ~72px */
+  }
+}
+
+/* ─── Typography & Typography Utilities ─────────────────────────────── */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--moonlight) 30%, var(--blush) 70%, var(--rose-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-rose {
+  background: linear-gradient(135deg, var(--blush) 0%, var(--rose) 50%, var(--wine) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--rose-gold) 0%, var(--rose-gold-dim) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Glassmorphism & Custom Layout Components ────────────────────── */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid var(--border-glow);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(232, 197, 154, 0.25);
+  box-shadow: 0 20px 50px -10px rgba(201, 123, 132, 0.12);
+}
+
+.glass-panel-active {
+  border-color: var(--border-glow-active);
+  box-shadow: 0 0 25px rgba(201, 123, 132, 0.15), inset 0 0 12px rgba(201, 123, 132, 0.05);
+}
+
+.glass-card {
+  background: rgba(28, 14, 17, 0.45);
+  border: 1px solid rgba(232, 197, 154, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(36, 18, 22, 0.6);
+  border-color: rgba(232, 197, 154, 0.2);
+  transform: translateY(-4px);
+}
+
+/* Custom premium input styling */
+.premium-input {
+  background: rgba(10, 5, 6, 0.6);
+  border: 1px solid rgba(232, 197, 154, 0.15);
+  color: var(--moonlight);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.premium-input:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 12px rgba(201, 123, 132, 0.25);
+  background: rgba(18, 9, 11, 0.8);
+}
+
+.premium-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--blush);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+/* Elegant Premium Buttons */
+.btn-rose-gold {
+  background: linear-gradient(135deg, var(--rose-gold) 0%, var(--rose-gold-dim) 100%);
+  color: var(--bg-dark);
+  font-weight: 700;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 15px rgba(232, 197, 154, 0.25);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-rose-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(232, 197, 154, 0.45);
+  filter: brightness(1.05);
+}
+
+.btn-rose-gold:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  border: 1px solid rgba(232, 197, 154, 0.3);
+  color: var(--rose-gold);
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  padding: 0.75rem 1.7rem;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-outline:hover {
+  background: rgba(232, 197, 154, 0.08);
+  border-color: var(--rose-gold);
+  color: var(--moonlight);
+  transform: translateY(-1px);
+}
+
+/* ─── Visual Enhancements & Gradients ──────────────────────────────── */
+.ambient-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.22;
+}
+
+.glow-wine {
+  background: var(--wine);
+}
+
+.glow-rose {
+  background: var(--rose);
+}
+
+.glow-gold {
+  background: var(--rose-gold-dim);
+}
+
+/* Paper Grain Texture */
+.paper-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 256px 256px;
+}
+
+/* Dynamic Heart Field Floating Canvas Container */
+.particle-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Elegant Wax Seal style */
+.wax-seal {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--wine) 30%, #440a15 90%);
+  border: 2px solid rgba(232, 197, 154, 0.35);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.wax-seal::after {
+  content: "♥";
+  color: var(--rose-gold);
+  font-size: 1.3rem;
+  font-family: var(--font-serif);
+}
+
+.wax-seal:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 15px rgba(201, 123, 132, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  border-color: var(--rose-gold);
+}
+
+/* ─── Custom keyframes and animations ───────────────────────────────── */
+@keyframes softPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.65;  transform: scale(1.05); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes pulseGold {
+  0%, 100% { box-shadow: 0 0 10px rgba(232, 197, 154, 0.15); border-color: rgba(232, 197, 154, 0.12); }
+  50% { box-shadow: 0 0 25px rgba(232, 197, 154, 0.45); border-color: rgba(232, 197, 154, 0.5); }
+}
+
+@keyframes textReveal {
+  0% { filter: blur(12px); opacity: 0; transform: translateY(20px); }
+  100% { filter: blur(0px); opacity: 1; transform: translateY(0); }
+}
+
+.animate-pulse-slow {
+  animation: softPulse 8s infinite ease-in-out;
+}
+
+.animate-float {
+  animation: float 6s infinite ease-in-out;
+}
+
+.animate-pulse-gold {
+  animation: pulseGold 3s infinite ease-in-out;
+}
+
+/* ─── Polaroid Scrapbook Effect ─────────────────────────────────────── */
+.polaroid-card {
+  background: #fdfaf6;
+  color: #2c1f22;
+  padding: 1rem 1rem 2.5rem 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border-radius: 2px;
+  transform: rotate(var(--rotation, 0deg));
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+}
+
+.polaroid-card::after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.polaroid-card:hover {
+  transform: rotate(0deg) scale(1.05) translateY(-8px);
+  z-index: 10;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+}
+
+.polaroid-img-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #1c1416 0%, #3a2529 100%);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.polaroid-caption {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  text-align: center;
+  margin-top: 1rem;
+  color: #2c1f22;
+  font-weight: 500;
+}
+
+.polaroid-date {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(44, 31, 34, 0.5);
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* ─── Ticket Invitation Effect for Planner ──────────────────────────── */
+.date-ticket {
+  background: radial-gradient(circle at 0% 50%, transparent 12px, rgba(28, 14, 17, 0.8) 13px),
+              radial-gradient(circle at 100% 50%, transparent 12px, rgba(28, 14, 17, 0.8) 13px);
+  background-size: 100% 100%;
+  border-left: 1px dashed rgba(232, 197, 154, 0.2);
+  border-right: 1px dashed rgba(232, 197, 154, 0.2);
+  position: relative;
+}
+
+.date-ticket::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rose-gold) 0%, var(--rose) 50%, var(--wine) 100%);
+}
+
+/* Ticket custom decorations depending on mood */
+.date-ticket-cozy {
+  --ticket-glow: rgba(232, 197, 154, 0.15);
+  border: 1px solid rgba(232, 197, 154, 0.15);
+}
+.date-ticket-romantic {
+  --ticket-glow: rgba(201, 123, 132, 0.25);
+  border: 1px solid rgba(201, 123, 132, 0.25);
+}
+.date-ticket-surprise {
+  --ticket-glow: rgba(168, 92, 101, 0.25);
+  border: 1px solid rgba(168, 92, 101, 0.2);
+}
+.date-ticket-elegant {
+  --ticket-glow: rgba(212, 175, 55, 0.25);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+.date-ticket-casual {
+  --ticket-glow: rgba(138, 118, 121, 0.15);
+  border: 1px solid rgba(138, 118, 121, 0.15);
+}
+
+/* ─── Music Player Widget Styles ───────────────────────────────── */
+.card {
+  position: relative;
+  background: rgba(20, 10, 12, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 197, 154, 0.12);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 340px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  margin: 20px auto;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #fdfaf6;
+}
+
+.card.is-zoomed {
+  max-width: 420px;
+}
+
+.mask {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #0d0507;
+  border: 6px solid rgba(232, 197, 154, 0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease;
+}
+
+.mask.is-zoomed {
+  transform: scale(1.15);
+}
+
+.spin {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  opacity: 0.85;
+}
+
+.cover-enter {
+  animation: cover-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cover-exit {
+  animation: cover-out 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hole {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #080405;
+  border: 3px solid #e8c59a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
+  z-index: 10;
+}
+
+.hole-inner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0d0708;
+  border: 1px solid rgba(232, 197, 154, 0.5);
+}
+
+.info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.scales {
+  width: 100%;
+  height: 36px;
+  opacity: 0.22;
+  fill: #e5b0b6;
+  pointer-events: none;
+  margin-bottom: 4px;
+}
+
+.track-info {
+  position: relative;
+  height: 54px;
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+}
+
+.ti-layer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ti-abs {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.artist {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #c97b84;
+}
+
+.artist.ti-enter {
+  animation: ti-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.artist.ti-exit {
+  animation: ti-out 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.track {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: #fdfaf6;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.track.ti-enter {
+  animation: ti-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.track.ti-exit {
+  animation: ti-out 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e8c59a, #c97b84);
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #8a7679;
+  font-family: var(--font-sans);
+  margin-top: -6px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.ctrl {
+  background: none;
+  border: none;
+  color: #8a7679;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ctrl:hover {
+  color: #fdfaf6;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ctrl-play {
+  background: linear-gradient(135deg, #e8c59a 0%, #c97b84 100%);
+  color: #080405;
+  width: 44px;
+  height: 44px;
+  box-shadow: 0 4px 15px rgba(201, 123, 132, 0.25);
+}
+
+.ctrl-play:hover {
+  color: #080405;
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(201, 123, 132, 0.45);
+  background: linear-gradient(135deg, #e8c59a 0%, #c97b84 100%);
+  filter: brightness(1.05);
+}
+
+.ctrl-toggle.is-active {
+  color: #e8c59a;
+}
+
+.ctrl-loop.mode-one .loop-one {
+  display: inline;
+}
+
+.ctrl-loop .loop-one {
+  display: none;
+  font-size: 8px;
+  font-weight: 800;
+  position: absolute;
+  background: #e8c59a;
+  color: #080405;
+  padding: 1px 3px;
+  border-radius: 10px;
+  transform: translate(6px, -6px);
+}
+
+@keyframes cover-in {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes cover-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes ti-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--dx));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ti-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(var(--dx));
+  }
+}
+
+/* ─── Responsive Adjustments ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .btn-rose-gold {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.7rem;
+  }
+  .btn-outline {
+    padding: 0.65rem 1.3rem;
+    font-size: 0.68rem;
+  }
+}
+
+/* ─── Premium Light Pastel Redesign System & Icon Fixes ───────────────── */
+:root {
+  --bg-dark:          #faf5f5; /* Elegant cream-blush pastel base background */
+  --bg-card:          rgba(255, 255, 255, 0.75); /* Light glass card base */
+  --bg-card-hover:    rgba(255, 255, 255, 0.9);
+  --border-glow:      rgba(201, 123, 132, 0.16);
+  --border-glow-active: rgba(201, 123, 132, 0.5);
+  
+  /* Romantic Light Accents (readable, soft, romantic tones) */
+  --wine:             #80283b; /* Soft burgundy wine highlight */
+  --wine-deep:        #ebdce0; /* Cozy light warm-blush background wash */
+  --blush:            #a64555; /* Medium deep blush for readable taglines */
+  --rose:             #b64b59; /* Rich romantic rose primary text/accent */
+  --rose-dark:        #993c4a;
+  --rose-gold:        #7a5933; /* Bronzed warm gold instead of white-gold */
+  --rose-gold-dim:    #94724a;
+  --moonlight:        #331f22; /* Warm dark cocoa body text for contrast */
+  --charcoal:         #f2e4e6; /* Soft pastel pink-gray */
+  --muted-mauve:      #7c6569; /* Elegant muted text */
+}
+
+/* 1. Global Overlapping Inputs Fix & Enlarge Icons */
+.relative > svg.absolute {
+  width: 1.15rem !important; /* Enlarged slightly (18.5px) for clear reading */
+  height: 1.15rem !important;
+  left: 0.85rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.relative > .premium-input {
+  padding-left: 2.75rem !important; /* Ensures text starts after the enlarged icon and never overlaps */
+}
+
+.premium-input {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(201, 123, 132, 0.22) !important;
+  color: var(--moonlight) !important;
+}
+
+.premium-input:focus {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: var(--rose) !important;
+  box-shadow: 0 0 12px rgba(201, 123, 132, 0.18) !important;
+}
+
+/* 2. Utility Class Overrides for Light Mode Mapping */
+.text-white {
+  color: var(--moonlight) !important;
+}
+.text-\[\#fdfaf6\] {
+  color: var(--moonlight) !important;
+}
+.text-white\/70, .text-\[\#fdfaf6\]\/70 {
+  color: rgba(51, 31, 34, 0.7) !important;
+}
+.text-white\/80, .text-\[\#fdfaf6\]\/80 {
+  color: rgba(51, 31, 34, 0.8) !important;
+}
+.bg-\[\#080405\] {
+  background-color: var(--bg-dark) !important;
+}
+.bg-\[\#080405\]\/90 {
+  background-color: rgba(250, 245, 245, 0.9) !important;
+}
+.bg-\[\#080405\]\/95 {
+  background-color: rgba(250, 245, 245, 0.95) !important;
+}
+.bg-\[\#12090b\] {
+  background-color: var(--bg-dark) !important;
+}
+.bg-\[\#180d10\] {
+  background-color: #ebdce0 !important;
+}
+.bg-\[\#160d10\] {
+  background-color: #f2e4e6 !important;
+}
+.bg-\[\#1c1416\]\/95 {
+  background-color: rgba(250, 245, 245, 0.95) !important;
+}
+.bg-\[\#160e10\]\/95 {
+  background-color: rgba(250, 245, 245, 0.95) !important;
+}
+.bg-white\/5 {
+  background-color: rgba(51, 31, 34, 0.05) !important;
+}
+.bg-white\/10 {
+  background-color: rgba(51, 31, 34, 0.09) !important;
+}
+.bg-white\/2 {
+  background-color: rgba(51, 31, 34, 0.02) !important;
+}
+.bg-white\/3 {
+  background-color: rgba(51, 31, 34, 0.03) !important;
+}
+.bg-white\/8 {
+  background-color: rgba(51, 31, 34, 0.08) !important;
+}
+.border-white\/10 {
+  border-color: rgba(201, 123, 132, 0.18) !important;
+}
+.border-white\/5 {
+  border-color: rgba(201, 123, 132, 0.12) !important;
+}
+
+/* 3. Date Ticket Pastel Colors */
+.date-ticket-cozy {
+  background: linear-gradient(to bottom, #fdf4eb, #f7dcc6) !important;
+}
+.date-ticket-romantic {
+  background: linear-gradient(to bottom, #fdf0f1, #f9cacf) !important;
+}
+.date-ticket-surprise {
+  background: linear-gradient(to bottom, #f6edfd, #eacdfc) !important;
+}
+.date-ticket-elegant {
+  background: linear-gradient(to bottom, #fdfaf0, #f6e8cc) !important;
+}
+.date-ticket-casual {
+  background: linear-gradient(to bottom, #effbf4, #ccf6da) !important;
+}
+.date-ticket-long-drive {
+  background: linear-gradient(to bottom, #eff7fb, #cce8f6) !important;
+}
+.date-ticket-movie {
+  background: linear-gradient(to bottom, #fdf0f0, #fccacb) !important;
+}
+.date-ticket-cafe {
+  background: linear-gradient(to bottom, #fbf2eb, #f7dac6) !important;
+}
+
+/* Keep all invitation card text elements dark & legible */
+.date-ticket p, 
+.date-ticket h4, 
+.date-ticket span,
+.date-ticket blockquote,
+.date-ticket italic {
+  color: #3b2226 !important;
+}
+
+/* 4. Additional Navigation and general fixes */
+nav.fixed {
+  background: rgba(250, 245, 245, 0.85) !important;
+  border-color: rgba(201, 123, 132, 0.2) !important;
+  box-shadow: 0 10px 30px -5px rgba(201, 123, 132, 0.12) !important;
+}
+nav.fixed button {
+  color: var(--moonlight) !important;
+}
+nav.fixed button:hover {
+  color: var(--wine) !important;
+}
+nav.fixed span {
+  color: var(--blush) !important;
+}
+nav.fixed .bg-\[rgba\(201\2c 123\2c 132\2c 0\.1\)\] {
+  background-color: rgba(201, 123, 132, 0.1) !important;
+}
+
+
+/* ─── Admin Isolation Guard ──────────────────────────────────────────────────
+   Everything inside data-admin="true" is a completely separate design system.
+   These rules hard-reset ALL romantic CSS variable overrides that globals.css
+   applies to :root, so the admin panel never inherits romantic styling.
+   ─────────────────────────────────────────────────────────────────────────── */
+[data-admin="true"],
+[data-admin="true"] * {
+  --bg-dark:          initial !important;
+  --bg-card:          initial !important;
+  --bg-card-hover:    initial !important;
+  --border-glow:      initial !important;
+  --border-glow-active: initial !important;
+  --wine:             initial !important;
+  --wine-deep:        initial !important;
+  --blush:            initial !important;
+  --rose:             initial !important;
+  --rose-dark:        initial !important;
+  --rose-gold:        initial !important;
+  --rose-gold-dim:    initial !important;
+  --moonlight:        initial !important;
+  --charcoal:         initial !important;
+  --muted-mauve:      initial !important;
+  --font-serif:       initial !important;
+  --font-sans:        initial !important;
+}
+
+/* Ensure admin body never gets the dark romantic background */
+body:has([data-admin="true"]) {
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+}
+
+/* Prevent romantic scrollbar from applying in admin */
+[data-admin="true"] ::-webkit-scrollbar-track {
+  background: #f1f5f9 !important;
+}
+[data-admin="true"] ::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+}

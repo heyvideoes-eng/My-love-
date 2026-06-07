@@ -1,0 +1,381 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Admin Theme — Complete isolation from the romantic globals.css
+   All admin pages have data-admin="true" on their root, so these rules
+   ONLY apply inside the admin shell. Nothing leaks to the Vanshika page.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+[data-admin="true"] {
+  --adm-bg:          #f1f5f9;
+  --adm-surface:     #ffffff;
+  --adm-surface-2:   #f8fafc;
+  --adm-border:      #e2e8f0;
+  --adm-border-2:    #cbd5e1;
+  --adm-sidebar:     #0f172a;
+  --adm-accent:      #6366f1;
+  --adm-accent-2:    #8b5cf6;
+  --adm-accent-dim:  rgba(99,102,241,0.12);
+  --adm-text:        #1e293b;
+  --adm-text-2:      #475569;
+  --adm-text-muted:  #94a3b8;
+  --adm-success:     #10b981;
+  --adm-warning:     #f59e0b;
+  --adm-danger:      #ef4444;
+  --adm-ai:          #8b5cf6;
+  --adm-radius:      10px;
+  --adm-font:        'Satoshi', 'Inter', system-ui, sans-serif;
+
+  /* Reset romantic overrides completely */
+  font-family: var(--adm-font);
+  background: var(--adm-bg);
+  color: var(--adm-text);
+}
+
+/* Reset all romantic CSS var overrides within admin */
+[data-admin="true"] * {
+  color: inherit;
+}
+
+[data-admin="true"] a {
+  text-decoration: none;
+}
+
+/* Admin card system */
+[data-admin="true"] .adm-card {
+  background: var(--adm-surface);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  padding: 1.25rem 1.5rem;
+}
+
+[data-admin="true"] .adm-card:hover {
+  border-color: var(--adm-border-2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* Admin section header */
+[data-admin="true"] .adm-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--adm-text);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+[data-admin="true"] .adm-subheading {
+  font-size: 0.82rem;
+  color: var(--adm-text-muted);
+  margin-bottom: 1.75rem;
+}
+
+/* Admin stat card */
+[data-admin="true"] .adm-stat {
+  background: var(--adm-surface);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  padding: 1.1rem 1.35rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: block;
+}
+
+[data-admin="true"] .adm-stat:hover {
+  border-color: var(--adm-accent);
+  box-shadow: 0 0 0 3px var(--adm-accent-dim);
+  transform: translateY(-1px);
+}
+
+[data-admin="true"] .adm-stat-num {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--adm-text);
+  letter-spacing: -0.02em;
+  display: block;
+}
+
+[data-admin="true"] .adm-stat-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--adm-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Admin form elements */
+[data-admin="true"] .adm-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--adm-text-2);
+  margin-bottom: 0.4rem;
+}
+
+[data-admin="true"] .adm-input,
+[data-admin="true"] .adm-textarea,
+[data-admin="true"] .adm-select {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--adm-border);
+  border-radius: 8px;
+  background: var(--adm-surface);
+  color: var(--adm-text);
+  font-family: var(--adm-font);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  -webkit-appearance: none;
+}
+
+[data-admin="true"] .adm-input:focus,
+[data-admin="true"] .adm-textarea:focus,
+[data-admin="true"] .adm-select:focus {
+  border-color: var(--adm-accent);
+  box-shadow: 0 0 0 3px var(--adm-accent-dim);
+}
+
+[data-admin="true"] .adm-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+/* Admin buttons */
+[data-admin="true"] .adm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: var(--adm-font);
+  transition: all 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+[data-admin="true"] .adm-btn-primary {
+  background: var(--adm-accent);
+  color: #fff;
+}
+[data-admin="true"] .adm-btn-primary:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+}
+
+[data-admin="true"] .adm-btn-outline {
+  background: transparent;
+  color: var(--adm-text-2);
+  border: 1px solid var(--adm-border-2);
+}
+[data-admin="true"] .adm-btn-outline:hover {
+  background: var(--adm-surface-2);
+  border-color: var(--adm-border-2);
+}
+
+[data-admin="true"] .adm-btn-danger {
+  background: transparent;
+  color: var(--adm-danger);
+  border: 1px solid rgba(239,68,68,0.3);
+}
+[data-admin="true"] .adm-btn-danger:hover {
+  background: rgba(239,68,68,0.08);
+}
+
+[data-admin="true"] .adm-btn-ai {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(139,92,246,0.3);
+}
+[data-admin="true"] .adm-btn-ai:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(139,92,246,0.4);
+}
+
+[data-admin="true"] .adm-btn-success {
+  background: var(--adm-success);
+  color: #fff;
+}
+[data-admin="true"] .adm-btn-success:hover {
+  background: #059669;
+}
+
+/* Badges */
+[data-admin="true"] .adm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+[data-admin="true"] .adm-badge-live      { background: rgba(16,185,129,0.12); color: #059669; }
+[data-admin="true"] .adm-badge-draft     { background: rgba(241,245,249,1);   color: #64748b; border: 1px solid #e2e8f0; }
+[data-admin="true"] .adm-badge-ai        { background: rgba(139,92,246,0.12); color: #7c3aed; }
+[data-admin="true"] .adm-badge-high      { background: rgba(239,68,68,0.1);   color: #dc2626; }
+[data-admin="true"] .adm-badge-medium    { background: rgba(245,158,11,0.12); color: #d97706; }
+[data-admin="true"] .adm-badge-low       { background: rgba(148,163,184,0.15);color: #64748b; }
+
+/* List item rows */
+[data-admin="true"] .adm-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--adm-border);
+  transition: background 0.12s;
+}
+[data-admin="true"] .adm-row:last-child { border-bottom: none; }
+[data-admin="true"] .adm-row:hover { background: var(--adm-surface-2); }
+
+/* AI output preview box */
+[data-admin="true"] .adm-ai-box {
+  background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(139,92,246,0.05));
+  border: 1px solid rgba(139,92,246,0.2);
+  border-radius: var(--adm-radius);
+  padding: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--adm-text);
+}
+
+/* Grid helpers */
+[data-admin="true"] .adm-grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+[data-admin="true"] .adm-grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+[data-admin="true"] .adm-grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem; }
+
+/* Divider */
+[data-admin="true"] .adm-divider {
+  height: 1px;
+  background: var(--adm-border);
+  margin: 1.5rem 0;
+}
+
+/* Section block (card wrapper) */
+[data-admin="true"] .adm-section {
+  background: var(--adm-surface);
+  border: 1px solid var(--adm-border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+[data-admin="true"] .adm-section-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--adm-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--adm-surface-2);
+}
+
+[data-admin="true"] .adm-section-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--adm-text);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Tabs */
+[data-admin="true"] .adm-tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--adm-border);
+  margin-bottom: 1.5rem;
+}
+[data-admin="true"] .adm-tab {
+  padding: 0.55rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--adm-text-muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--adm-font);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.15s;
+}
+[data-admin="true"] .adm-tab.active {
+  color: var(--adm-accent);
+  border-bottom-color: var(--adm-accent);
+}
+[data-admin="true"] .adm-tab:hover:not(.active) {
+  color: var(--adm-text-2);
+}
+
+/* Scrollbar override for admin */
+[data-admin="true"] ::-webkit-scrollbar { width: 6px; }
+[data-admin="true"] ::-webkit-scrollbar-track { background: transparent; }
+[data-admin="true"] ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+[data-admin="true"] ::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+
+/* Loader spinner */
+[data-admin="true"] .adm-spinner {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid rgba(99,102,241,0.2);
+  border-top-color: var(--adm-accent);
+  animation: adm-spin 0.6s linear infinite;
+  display: inline-block;
+}
+@keyframes adm-spin { to { transform: rotate(360deg); } }
+
+/* Toggle switch */
+[data-admin="true"] .adm-toggle {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+[data-admin="true"] .adm-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+[data-admin="true"] .adm-toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: #e2e8f0;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+[data-admin="true"] .adm-toggle-slider::before {
+  content: "";
+  position: absolute;
+  width: 14px; height: 14px;
+  left: 3px; top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+[data-admin="true"] .adm-toggle input:checked + .adm-toggle-slider {
+  background: var(--adm-accent);
+}
+[data-admin="true"] .adm-toggle input:checked + .adm-toggle-slider::before {
+  transform: translateX(16px);
+}
+
+/* Login page override */
+[data-admin-login="true"] {
+  font-family: 'Satoshi', 'Inter', system-ui, sans-serif;
+  background: #0f172a;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
