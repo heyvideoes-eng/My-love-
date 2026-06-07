@@ -223,10 +223,21 @@ export default function RomanticPlayer() {
   // Initialize from DB once loaded
   const [hasInitializedDb, setHasInitializedDb] = useState(false);
   useEffect(() => {
-    if (!loading && !hasInitializedDb && availableSongs !== CURATED_BOLLYWOOD_SONGS) {
-      setCurrentSong(availableSongs[0]);
-      setQueue(availableSongs.slice(0, Math.min(3, availableSongs.length)));
-      setHasInitializedDb(true);
+    if (!loading && availableSongs !== CURATED_BOLLYWOOD_SONGS) {
+      if (!hasInitializedDb) {
+        setCurrentSong(availableSongs[0]);
+        setQueue(availableSongs);
+        setHasInitializedDb(true);
+      } else {
+        // Auto-append any newly added songs from the DB to the live queue
+        setQueue((prevQueue) => {
+          const newSongs = availableSongs.filter((s) => !prevQueue.some((q) => q.videoId === s.videoId));
+          if (newSongs.length > 0) {
+            return [...prevQueue, ...newSongs];
+          }
+          return prevQueue;
+        });
+      }
     }
   }, [loading, availableSongs, hasInitializedDb]);
 
