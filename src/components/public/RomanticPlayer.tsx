@@ -258,6 +258,11 @@ export default function RomanticPlayer() {
   // Ref handles for timers
   const progressInterval = useRef<any>(null);
   const isApiLoaded = useRef(false);
+  const currentVideoIdRef = useRef(currentSong.videoId);
+
+  useEffect(() => {
+    currentVideoIdRef.current = currentSong.videoId;
+  }, [currentSong.videoId]);
 
   // ─── 1. Load YouTube IFrame API ───────────────────────────────────────────
   useEffect(() => {
@@ -298,14 +303,14 @@ export default function RomanticPlayer() {
         setIsPlaying(true);
       }
     }
-  }, [queueIndex, queue]);
+  }, [queueIndex, queue, player]);
 
   const initializePlayer = () => {
     try {
       const ytPlayer = new (window as any).YT.Player("youtube-hidden-frame", {
         height: "1",
         width: "1",
-        videoId: currentSong.videoId,
+        videoId: currentVideoIdRef.current,
         playerVars: {
           autoplay: 0,
           controls: 0,
@@ -319,6 +324,11 @@ export default function RomanticPlayer() {
           onReady: (e: any) => {
             setPlayer(e.target);
             e.target.setVolume(volume);
+            
+            // If the state advanced before the player was ready, load the real current song.
+            if (currentVideoIdRef.current !== e.target.getVideoData()?.video_id) {
+              e.target.cueVideoById(currentVideoIdRef.current);
+            }
           },
           onStateChange: (e: any) => {
             // YT.PlayerState.PLAYING === 1
