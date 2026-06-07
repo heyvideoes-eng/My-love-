@@ -29,7 +29,7 @@ function TextEffectWithCustomVariants() {
     return color;
   };
 
-  const fancyVariants = {
+  const fancyVariants: any = {
     container: {
       hidden: { opacity: 0 },
       visible: {
