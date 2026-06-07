@@ -126,7 +126,6 @@ export default function Navigation({ theme, setTheme, visitStreak, onResetIntro,
         <div className="hidden lg:flex items-center gap-6 text-[11px] font-bold uppercase tracking-widest text-[#8a7679]">
           <button onClick={() => handleScrollTo("dashboard")} className="hover:text-[#fdfaf6] transition-colors cursor-pointer">Dashboard</button>
           <button onClick={() => handleScrollTo("date-reminders")} className="hover:text-[#fdfaf6] transition-colors cursor-pointer">Dates</button>
-          <button onClick={() => handleScrollTo("date-planner")} className="hover:text-[#fdfaf6] transition-colors cursor-pointer">Planner</button>
           <button onClick={() => handleScrollTo("memories")} className="hover:text-[#fdfaf6] transition-colors cursor-pointer">Timeline</button>
           <button onClick={() => handleScrollTo("gallery")} className="hover:text-[#fdfaf6] transition-colors cursor-pointer">Gallery</button>
           <button onClick={() => handleScrollTo("love-letters")} className="hover:text-[#fdfaf6] transition-colors cursor-pointer">Letters</button>
