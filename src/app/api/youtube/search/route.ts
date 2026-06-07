@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import YouTube from "youtube-sr";
 
+function extractYouTubeId(url: string) {
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+  return match ? match[1] : null;
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("q");
@@ -11,7 +16,30 @@ export async function GET(request: Request) {
   }
 
   try {
-    const videos = await YouTube.search(query, { limit, type: "video" });
+    let videos: any[] = [];
+    
+    // Check if user pasted a direct YouTube link
+    const videoId = extractYouTubeId(query);
+    if (videoId) {
+      try {
+        const oembedRes = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
+        if (oembedRes.ok) {
+          const oembedData = await oembedRes.json();
+          videos = [{
+            id: videoId,
+            title: oembedData.title,
+            channel: { name: oembedData.author_name },
+            thumbnail: { url: oembedData.thumbnail_url }
+          }];
+        }
+      } catch (e) {
+        // Ignore and fallback
+      }
+    } 
+    
+    if (videos.length === 0 && !videoId) {
+      videos = await YouTube.search(query, { limit, type: "video" });
+    }
 
     const results = videos.map((video) => ({
       id:        video.id ?? "",
