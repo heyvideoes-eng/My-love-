@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { createAdminSupabaseClient } from "@/lib/supabase/server";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export async function GET() {
-  const supabase = await createAdminSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   if (!supabase) return NextResponse.json({ error: "Not configured" }, { status: 503 });
   const { data, error } = await supabase.from("reminders").select("*").order("event_date", { ascending: true });
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
@@ -10,7 +10,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const supabase = await createAdminSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   if (!supabase) return NextResponse.json({ error: "Not configured" }, { status: 503 });
   const body = await request.json();
   const { data, error } = await supabase.from("reminders").insert(body).select().single();
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 }
 
 export async function PATCH(request: Request) {
-  const supabase = await createAdminSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   if (!supabase) return NextResponse.json({ error: "Not configured" }, { status: 503 });
   const { id, ...updates } = await request.json();
   if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 });
@@ -29,7 +29,7 @@ export async function PATCH(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const supabase = await createAdminSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   if (!supabase) return NextResponse.json({ error: "Not configured" }, { status: 503 });
   const { id } = await request.json();
   if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 });

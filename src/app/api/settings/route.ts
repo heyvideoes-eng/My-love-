@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { createAdminSupabaseClient } from "@/lib/supabase/server";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export async function GET() {
-  const supabase = await createAdminSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   if (!supabase) return NextResponse.json({ error: "Not configured" }, { status: 503 });
   const { data, error } = await supabase.from("site_settings").select("*").limit(1).maybeSingle();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
@@ -10,7 +10,7 @@ export async function GET() {
 }
 
 export async function PATCH(request: Request) {
-  const supabase = await createAdminSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   if (!supabase) return NextResponse.json({ error: "Not configured" }, { status: 503 });
   const updates = await request.json();
 

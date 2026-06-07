@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Search, Music, Heart, Plus, Trash2, Sparkles, Disc } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRealtimeData } from "@/hooks/useRealtimeData";
+import { MusicTrack } from "@/lib/types";
 
 // ─── Song Type Definition ───────────────────────────────────────────────────
 export interface YouTubeSong {
@@ -187,6 +189,27 @@ const CURATED_BOLLYWOOD_SONGS: YouTubeSong[] = [
 ];
 
 export default function RomanticPlayer() {
+  const { data: dbTracks, loading } = useRealtimeData<MusicTrack>("music_tracks", "display_order", true);
+
+  const availableSongs = useMemo(() => {
+    const publishedDbTracks = dbTracks.filter((t) => t.is_published && t.youtube_id);
+    if (publishedDbTracks.length > 0) {
+      return publishedDbTracks.map((track) => ({
+        id: track.id,
+        title: track.title,
+        videoId: track.youtube_id || "",
+        thumbnail: track.thumbnail_url || `https://img.youtube.com/vi/${track.youtube_id}/0.jpg`,
+        channel: track.artist || "Unknown Artist",
+        moods: track.mood_tag ? [track.mood_tag] : ["romantic"],
+        times: ["morning", "afternoon", "evening", "night"] as ("morning" | "afternoon" | "evening" | "night")[],
+        weight: track.is_featured ? 10 : 8,
+        dateNightBias: track.mood_tag === "romantic",
+        peacefulBias: track.mood_tag === "peaceful",
+      }));
+    }
+    return CURATED_BOLLYWOOD_SONGS;
+  }, [dbTracks]);
+
   const [player, setPlayer] = useState<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState<YouTubeSong>(CURATED_BOLLYWOOD_SONGS[0]);
@@ -196,6 +219,16 @@ export default function RomanticPlayer() {
     CURATED_BOLLYWOOD_SONGS[7]
   ]);
   const [queueIndex, setQueueIndex] = useState(0);
+
+  // Initialize from DB once loaded
+  const [hasInitializedDb, setHasInitializedDb] = useState(false);
+  useEffect(() => {
+    if (!loading && !hasInitializedDb && availableSongs !== CURATED_BOLLYWOOD_SONGS) {
+      setCurrentSong(availableSongs[0]);
+      setQueue(availableSongs.slice(0, Math.min(3, availableSongs.length)));
+      setHasInitializedDb(true);
+    }
+  }, [loading, availableSongs, hasInitializedDb]);
 
   // Playback state variables
   const [currentTime, setCurrentTime] = useState(0);
@@ -369,10 +402,10 @@ export default function RomanticPlayer() {
     } catch (e) {}
 
     // 3. Score all songs
-    let bestSong = CURATED_BOLLYWOOD_SONGS[0];
+    let bestSong = availableSongs[0];
     let maxScore = -Infinity;
 
-    CURATED_BOLLYWOOD_SONGS.forEach((song) => {
+    availableSongs.forEach((song) => {
       const score = scoreSong(song, timeOfDay, day, activeMood, playedHistory);
       if (score > maxScore) {
         maxScore = score;
@@ -408,7 +441,7 @@ export default function RomanticPlayer() {
     // Offline / Fallback local search matching
     setTimeout(() => {
       const q = query.toLowerCase();
-      const matches = CURATED_BOLLYWOOD_SONGS.filter(
+      const matches = availableSongs.filter(
         (song) =>
           song.title.toLowerCase().includes(q) ||
           song.channel.toLowerCase().includes(q)

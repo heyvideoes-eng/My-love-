@@ -11,9 +11,12 @@ export function useRealtimeData<T>(
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
     const supabase = createClient();
     if (!supabase) {
-      setLoading(false);
+      setTimeout(() => {
+        if (mounted) setLoading(false);
+      }, 0);
       return;
     }
 
@@ -52,6 +55,7 @@ export function useRealtimeData<T>(
       .subscribe();
 
     return () => {
+      mounted = false;
       supabase.removeChannel(channel);
     };
   }, [tableName, orderByColumn, ascending]);
