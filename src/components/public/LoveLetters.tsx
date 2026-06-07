@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Mail, X, BookOpen } from "lucide-react";
+import { useRealtimeData } from "@/hooks/useRealtimeData";
 
 interface Letter {
   id: number;
@@ -47,6 +48,18 @@ export default function LoveLetters() {
   const [selectedLetter, setSelectedLetter] = useState<Letter | null>(null);
   const [isOpenAnimation, setIsOpenAnimation] = useState(false);
 
+  const { data: dbNotes } = useRealtimeData<any>("love_notes", "created_at", true, []);
+
+  const activeLetters = dbNotes.length > 0
+    ? dbNotes.map((n: any) => ({
+        id: n.id,
+        trigger: n.title || "Open when...",
+        emoji: n.mood_tag || "💌",
+        content: n.content,
+        closing: n.category === 'vow' ? "Forever yours," : "With all my love,"
+      }))
+    : LETTERS;
+
   const handleOpenLetter = (letter: Letter) => {
     setSelectedLetter(letter);
     setIsOpenAnimation(true);
@@ -71,7 +84,7 @@ export default function LoveLetters() {
 
         {/* Envelope Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
-          {LETTERS.map((letter) => (
+          {activeLetters.map((letter: any) => (
             <motion.div
               whileHover={{ y: -6 }}
               key={letter.id}
@@ -139,7 +152,7 @@ export default function LoveLetters() {
                   <BookOpen className="w-4 h-4" />
                   <span>Private Correspondence</span>
                   <span>•</span>
-                  <span>{selectedLetter.trigger.split("... ")[1]}</span>
+                  <span>{selectedLetter.trigger.includes("... ") ? selectedLetter.trigger.split("... ")[1] : selectedLetter.trigger}</span>
                 </div>
 
                 {/* Body Text */}

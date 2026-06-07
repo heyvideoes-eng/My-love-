@@ -16,7 +16,7 @@ export default function MusicClient({ tracks: initial }: Props) {
   const [searching, setSearching] = useState(false);
   const [saving, startSaving] = useTransition();
 
-  const blank: MusicTrack = { id: "", title: "", artist: null, youtube_id: null, thumbnail_url: null, mood_tag: null, is_featured: false, display_order: 0, is_published: false, created_at: "", updated_at: "" };
+  const blank: MusicTrack = { id: "", title: "", artist: null, youtube_id: null, thumbnail_url: null, mood_tag: null, is_featured: false, display_order: 0, is_published: true, created_at: "", updated_at: "" };
   const form = editing ?? blank;
 
   const handleSearch = async () => {
