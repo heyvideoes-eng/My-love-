@@ -110,7 +110,7 @@ const C = {
   topbarActions: { display: "flex", alignItems: "center", gap: "0.75rem" } as React.CSSProperties,
   topbarBtn: (variant: "primary" | "outline"): React.CSSProperties => ({
     padding: "0.4rem 0.9rem", borderRadius: 7, fontSize: "0.72rem", fontWeight: 600,
-    cursor: "pointer", border: "none", fontFamily: "inherit", textDecoration: "none",
+    cursor: "pointer", fontFamily: "inherit", textDecoration: "none",
     display: "inline-flex", alignItems: "center", gap: "0.35rem",
     background: variant === "primary" ? "#6366f1" : "transparent",
     color: variant === "primary" ? "#fff" : "#64748b",
